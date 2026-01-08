@@ -1,4 +1,4 @@
-module github.com/ruraomsk/setpotop
+module github.com/ruraomsk/setrockchip
 
 go 1.24.0
 

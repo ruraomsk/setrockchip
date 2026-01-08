@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/ruraomsk/setpotop/command"
-	"github.com/ruraomsk/setpotop/scp"
+	"github.com/ruraomsk/setrockchip/command"
+	"github.com/ruraomsk/setrockchip/scp"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -119,18 +119,18 @@ func loopMain(host string, port int, user string, password string, setupclear bo
 	}
 	LogMessage("Записываем сервисы автоматического запуска программ")
 	progress(7, 9)
-	datas, _ = resource.ReadFile("torockchip/potop.service")
-	err = scp.WriteFile("/etc/systemd/system/potop.service", datas, false)
-	if err != nil {
-		ErrorMessage(err.Error())
-		return
-	}
-	datas, _ = resource.ReadFile("torockchip/vpot.service")
-	err = scp.WriteFile("/etc/systemd/system/vpot.service", datas, false)
-	if err != nil {
-		ErrorMessage(err.Error())
-		return
-	}
+	// datas, _ = resource.ReadFile("torockchip/potop.service")
+	// err = scp.WriteFile("/etc/systemd/system/potop.service", datas, false)
+	// if err != nil {
+	// 	ErrorMessage(err.Error())
+	// 	return
+	// }
+	// datas, _ = resource.ReadFile("torockchip/vpot.service")
+	// err = scp.WriteFile("/etc/systemd/system/vpot.service", datas, false)
+	// if err != nil {
+	// 	ErrorMessage(err.Error())
+	// 	return
+	// }
 	LogMessage("Записываем программу potop")
 	progress(8, 9)
 	err = scp.CopyFile("potop", "/home/rura/potop", true)
@@ -147,8 +147,8 @@ func loopMain(host string, port int, user string, password string, setupclear bo
 	}
 	LogMessage("Включаем сервисы автоматического запуска программ")
 	progress(9, 9)
-	command.AnyCommand("systemctl enable potop.service")
-	command.AnyCommand("systemctl enable vpot.service")
+	// command.AnyCommand("systemctl enable potop.service")
+	// command.AnyCommand("systemctl enable vpot.service")
 
 	LogMessage("Устройство нужно перезагрузить")
 	allgood = true
