@@ -16,7 +16,8 @@ var logLines []string
 var maxLogLines = 100
 var isRunning bool
 
-//go:embed tolt5x tobanana
+//go:embed torockchip
+
 var resource embed.FS
 var app *tview.Application
 var form *tview.Form
