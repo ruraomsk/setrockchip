@@ -129,11 +129,17 @@ func loopMain(host string, port int, user string, password string, setupclear bo
 	LogMessage("Записываем скрипт автоматичекого запуска программ")
 	progress(6, 9)
 	datas, _ = resource.ReadFile("torockchip/S99potop")
-	err = scp.WriteFile("/etc/init.d/potop", datas, true)
+	err = scp.WriteFile("/etc/init.d/S99potop", datas, true)
 	if err != nil {
 		ErrorMessage(err.Error())
 		return
 	}
+	err = command.Permisson("/etc/init.d", "S99potop")
+	if err != nil {
+		ErrorMessage(err.Error())
+		return
+	}
+
 	LogMessage("Записываем сервисы автоматического запуска программ")
 	progress(7, 9)
 	// datas, _ = resource.ReadFile("torockchip/potop.service")

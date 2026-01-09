@@ -80,6 +80,19 @@ func CreateDir(path string) error {
 	}
 	return nil
 }
+func Permisson(path string, file string) error {
+	session, err := conn.NewSession()
+	if err != nil {
+		return err
+	}
+	defer session.Close()
+	var b bytes.Buffer
+	session.Stdout = &b
+	if err := session.Run(fmt.Sprintf("cd %s ; chmod 755 %s ", path, file)); err != nil {
+		return err
+	}
+	return nil
+}
 
 func DeleteDir(path string) error {
 	session, err := conn.NewSession()
