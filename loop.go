@@ -93,26 +93,43 @@ func loopMain(host string, port int, user string, password string, setupclear bo
 		}
 
 	}
-	LogMessage("Создаем каталог для программ")
+	LogMessage("Создаем каталоги для программ")
 	progress(4, 9)
 	err = command.CreateDir("/home/rura")
 	if err != nil {
 		ErrorMessage(err.Error())
 		return
 	}
-
-	LogMessage("Записываем скрипт запуска программ")
-	progress(5, 9)
-	datas, _ := resource.ReadFile("torockchip/gobanana.sh")
-	err = scp.WriteFile("/home/rura/gobanana.sh", datas, true)
+	err = command.CreateDir("/etc/qt5")
 	if err != nil {
 		ErrorMessage(err.Error())
 		return
 	}
+	LogMessage("Записываем скрипты запуска программ")
+	progress(5, 9)
+	datas, _ := resource.ReadFile("torockchip/gopotop.sh")
+	err = scp.WriteFile("/home/rura/gopotop.sh", datas, true)
+	if err != nil {
+		ErrorMessage(err.Error())
+		return
+	}
+	datas, _ = resource.ReadFile("torockchip/govpot.sh")
+	err = scp.WriteFile("/home/rura/govpot.sh", datas, true)
+	if err != nil {
+		ErrorMessage(err.Error())
+		return
+	}
+	datas, _ = resource.ReadFile("torockchip/eglfs_kms.json")
+	err = scp.WriteFile("/etc/qt5/eglfs_kms.json", datas, false)
+	if err != nil {
+		ErrorMessage(err.Error())
+		return
+	}
+
 	LogMessage("Записываем скрипт автоматичекого запуска программ")
 	progress(6, 9)
-	datas, _ = resource.ReadFile("torockchip/rc.local")
-	err = scp.WriteFile("/etc/rc.local", datas, true)
+	datas, _ = resource.ReadFile("torockchip/S99potop")
+	err = scp.WriteFile("/etc/init.d/S99potop", datas, true)
 	if err != nil {
 		ErrorMessage(err.Error())
 		return
@@ -147,8 +164,6 @@ func loopMain(host string, port int, user string, password string, setupclear bo
 	}
 	LogMessage("Включаем сервисы автоматического запуска программ")
 	progress(9, 9)
-	// command.AnyCommand("systemctl enable potop.service")
-	// command.AnyCommand("systemctl enable vpot.service")
 
 	LogMessage("Устройство нужно перезагрузить")
 	allgood = true

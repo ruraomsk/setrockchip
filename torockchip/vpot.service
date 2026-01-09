@@ -1,9 +1,0 @@
-[Unit]
-Description=VPot System  Service
-After=network.target
-[Service]
-Type=oneshot
-User=root
-ExecStart=/home/rura/vpot
-[Install]
-WantedBy=multi-user.target
