@@ -35,7 +35,7 @@ func main() {
 
 	// Создаем форму для ввода параметров
 	form = tview.NewForm().
-		AddInputField("IP Устройства", "192.168.88.101", 30, nil, nil).
+		AddInputField("IP Устройства", "192.168.88.100", 30, nil, nil).
 		AddInputField("Номер порта SSH ", "22", 10, nil, nil).
 		AddInputField("Пользователь", "root", 10, nil, nil).
 		AddInputField("Пароль", "1234", 10, nil, nil).AddCheckbox("Сбросить настройки", check, func(checked bool) {
@@ -84,7 +84,7 @@ func main() {
 			port = 22
 		}
 		if host == "" {
-			host = "192.168.88.101"
+			host = "192.168.88.100"
 		}
 		if user == "" {
 			user = "root"
