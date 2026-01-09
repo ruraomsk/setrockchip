@@ -51,12 +51,17 @@ func loopMain(host string, port int, user string, password string, setupclear bo
 	LogMessage(fmt.Sprintf("Устройство с операционной системой:%s", name))
 	LogMessage("Останавливаем potop на целевой системе")
 	progress(1, 9)
-	err = command.KillProc("gobanana")
+	err = command.KillProc("gopotop")
 	if err != nil {
 		ErrorMessage(err.Error())
 		return
 	}
 	err = command.KillProc("potop")
+	if err != nil {
+		ErrorMessage(err.Error())
+		return
+	}
+	err = command.KillProc("govpot")
 	if err != nil {
 		ErrorMessage(err.Error())
 		return
