@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var addLog = func(format string, args ...interface{}) {
+var addLog = func(format string, args ...any) {
 	message := fmt.Sprintf("[white][%s] %s", time.Now().Format("15:04:05"), fmt.Sprintf(format, args...))
 	logLines = append(logLines, message)
 
